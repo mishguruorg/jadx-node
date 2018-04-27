@@ -8,7 +8,7 @@ const runJadx = async (source: string, destinationDirectory: string) => {
     {
       env: {
         ...process.env,
-        JAVA_OPTS: "-Xmx2G"
+        JAVA_OPTS: '-Xmx2G'
       }
     }
   )
