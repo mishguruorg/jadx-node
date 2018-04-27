@@ -1,0 +1,60 @@
+{
+  "name": "jadx-node",
+  "version": "1.0.0",
+  "description": "Beeeeep Beeep Beeeep - A node wrapper around Jadx for decompiling java stuff",
+  "main": "dist/index.js",
+  "bin": {
+    "jadx": "./bin/jadx/bin/jadx"
+  },
+  "scripts": {
+    "build": "pkg-build",
+    "prepublish": "npm run build",
+    "postpublish": "git push --tags",
+    "flow": "pkg-flow",
+    "lint": "pkg-lint",
+    "test": "NODE_ENV=test_local pkg-test",
+    "test-only": "NODE_ENV=test_local pkg-test-only",
+    "coverage": "NODE_ENV=test_local pkg-coverage",
+    "which-jadx": "which jadx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mishguruorg/jadx-node.git"
+  },
+  "author": "developers@mish.guru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mishguruorg/jadx-node/issues"
+  },
+  "homepage": "https://github.com/mishguruorg/jadx-node#readme",
+  "devDependencies": {
+    "@mishguru/package": "^2.2.2"
+  },
+  "babel": {
+    "presets": [
+      "flow",
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      [
+        "transform-object-rest-spread",
+        {
+          "useBuiltIns": true
+        }
+      ]
+    ]
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  }
+}
