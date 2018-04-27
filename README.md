@@ -19,7 +19,7 @@ import runJadx from '@mishguru/jadx-node'
 const source ='/path/to/target/classes.dex'
 var destination = '/Users/brendon/Scratch/dump-test'
 
-runJadx(source, destination).then(console.log)
+await runJadx(source, destination)
 ```
 
 ## LICENSE
