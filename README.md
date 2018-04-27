@@ -17,7 +17,7 @@ npm install @mishguru/jadx-node
 import runJadx from '@mishguru/jadx-node'
 
 const source ='/path/to/target/classes.dex'
-var destination = '/Users/brendon/Scratch/dump-test'
+const destination = '/Users/brendon/decompiledResult/'
 
 await runJadx(source, destination)
 ```
