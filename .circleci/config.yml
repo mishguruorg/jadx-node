@@ -29,16 +29,18 @@ jobs:
       steps:
         - restore_cache:
             key: "v1-git-cache-{{ .Branch }}-{{ .Revision }}"
+        - checkout
         - restore_cache:
             key: "v1-project-cache-{{ checksum \"package.json\" }}"
         - run: "npm run lint"
     flow:
-      working_directory: "~/mish-data"
+      working_directory: "~/jadx-node"
       docker:
         - image: "circleci/node:8.9.4"
       steps:
         - restore_cache:
             key: "v1-git-cache-{{ .Branch }}-{{ .Revision }}"
+        - checkout
         - restore_cache:
             key: "v1-project-cache-{{ checksum \"package.json\" }}"
         - run: "npm run flow"
@@ -49,6 +51,7 @@ jobs:
       steps:
         - restore_cache:
             key: "v1-git-cache-{{ .Branch }}-{{ .Revision }}"
+        - checkout
         - restore_cache:
             key: "v1-project-cache-{{ checksum \"package.json\" }}"
         - run: "npm run test -- --verbose"
