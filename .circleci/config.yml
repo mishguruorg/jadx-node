@@ -1,0 +1,62 @@
+version: 2
+jobs:
+    setup:
+      working_directory: "~/jadx-node"
+      docker:
+        - image: "circleci/node:8.9.4"
+      steps:
+        - restore_cache:
+            key: "v1-git-cache-{{ .Branch }}-{{ .Revision }}"
+        - checkout
+        - save_cache:
+            key: "v1-git-cache-{{ .Branch }}-{{ .Revision }}"
+            paths:
+              - ".git"
+        - run: "npm install"
+        - save_cache:
+            key: "v1-npm-cache-{{ checksum \"package.json\" }}"
+            paths:
+              - "./node_modules"
+        - run: "npm run build"
+        - save_cache:
+            key: "v1-project-cache-{{ checksum \"package.json\" }}"
+            paths:
+              - "."
+    lint:
+      working_directory: "~/jadx-node"
+      docker:
+        - image: "circleci/node:8.9.4"
+      steps:
+        - restore_cache:
+            key: "v1-project-cache-{{ checksum \"package.json\" }}"
+        - run: "npm run lint"
+    flow:
+      working_directory: "~/mish-data"
+      docker:
+        - image: "circleci/node:8.9.4"
+      steps:
+        - restore_cache:
+            key: "v1-project-cache-{{ checksum \"package.json\" }}"
+        - run: "npm run flow"
+    test:
+      working_directory: "~/jadx-node"
+      docker:
+        - image: "circleci/node:8.9.4"
+      steps:
+        - restore_cache:
+            key: "v1-project-cache-{{ checksum \"package.json\" }}"
+        - run: "npm run test -- --verbose"
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - setup
+      - lint:
+          requires:
+            - setup
+      - flow:
+          requires:
+            - setup
+      - test:
+          requires:
+            - setup
