@@ -1,6 +1,6 @@
 {
   "name": "@mishguru/jadx-node",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Beeeeep Beeep Beeeep - A node wrapper around Jadx for decompiling java stuff",
   "main": "dist/index.js",
   "bin": {
