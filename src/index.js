@@ -1,9 +1,13 @@
 /* @flow */
 import { spawn } from 'child_process'
+import path from 'path'
+
+const jadxPath = path.resolve(path.join(__dirname, '../bin/jadx/bin/jadx/'))
 
 const runJadx = async (source: string, destinationDirectory: string) => {
+  console.log('Jadx Path: ', jadxPath)
   const jadx = spawn(
-    'jadx',
+    jadxPath,
     ['-r', '--show-bad-code', '-j', '6', '-d', destinationDirectory, source],
     {
       env: {
