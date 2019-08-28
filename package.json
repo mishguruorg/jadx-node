@@ -13,8 +13,6 @@
     "flow": "pkg-flow",
     "lint": "pkg-lint",
     "test": "NODE_ENV=test_local pkg-test",
-    "test-only": "NODE_ENV=test_local pkg-test-only",
-    "coverage": "NODE_ENV=test_local pkg-coverage",
     "which-jadx": "which jadx"
   },
   "repository": {
@@ -28,33 +26,6 @@
   },
   "homepage": "https://github.com/mishguruorg/jadx-node#readme",
   "devDependencies": {
-    "@mishguru/package": "^2.2.2"
-  },
-  "babel": {
-    "presets": [
-      "flow",
-      [
-        "env",
-        {
-          "targets": {
-            "node": "6.10"
-          }
-        }
-      ]
-    ],
-    "plugins": [
-      [
-        "transform-object-rest-spread",
-        {
-          "useBuiltIns": true
-        }
-      ]
-    ]
-  },
-  "ava": {
-    "require": [
-      "babel-register"
-    ],
-    "babel": "inherit"
+    "@mishguru/package": "^7.7.0"
   }
 }

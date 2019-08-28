@@ -24,7 +24,7 @@ await runJadx(source, destination)
 
 ## LICENSE
 
-Copyright 2018 Mish Guru Ltd
+Copyright 2019 Mish Guru Ltd
 
 Permission to use, copy, modify, and/or distribute this software for any purpose 
 with or without fee is hereby granted, provided that the above copyright notice 
