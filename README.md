@@ -4,22 +4,40 @@
 
 A light wrapper around jadx, a java decompiler.
 
+## Why?
 
-## Install
+- You don't need to have `jadx` installed locally. A copy is bundled with this
+  package.
+- You can use this library to invoke `jadx` without having to spawn the process
+  yourself.
+- Jadx memory usage is capped at 2GB, to minimise crashing from out-of-memory
+  errors.
+- Jadx is configured to skip resources, show code that it can't decompile and
+  use up to 6 threads.
+
+## CLI Usage
 
 ```bash
-npm install @mishguru/jadx-node
+$ npm install --global @mishguru/jadx-node
 ```
 
-## Usage
+```bash
+$ jadx-node --input ./classes.dex --output ./decompiledResult/
+```
+
+## JavaScript Usage
+
+```bash
+$ npm install --save @mishguru/jadx-node
+```
 
 ```javascript
-import runJadx from '@mishguru/jadx-node'
+import jadx from '@mishguru/jadx-node'
 
-const source ='/path/to/target/classes.dex'
-const destination = '/Users/brendon/decompiledResult/'
+const source ='./classes.dex'
+const destination = './decompiledResult/'
 
-await runJadx(source, destination)
+await jadx(source, destination)
 ```
 
 ## LICENSE
