@@ -1,9 +1,0 @@
-[ignore]
-.*/nock/node_modules/changelog/examples/node\.json$
-.*/protobufjs/src/bower\.json$
-
-[include]
-
-[libs]
-
-[options]

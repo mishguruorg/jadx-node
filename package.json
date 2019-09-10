@@ -1,31 +1,35 @@
 {
   "name": "@mishguru/jadx-node",
   "version": "1.0.4",
-  "description": "Beeeeep Beeep Beeeep - A node wrapper around Jadx for decompiling java stuff",
+  "description": "A wrapper around Jadx for decompiling Java dex files",
   "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
   "bin": {
-    "jadx": "./bin/jadx/bin/jadx"
+    "jadx-node": "./bin/jadx-node"
   },
   "scripts": {
     "build": "pkg-build",
-    "prepublish": "npm run build",
-    "postpublish": "git push --tags",
-    "flow": "pkg-flow",
     "lint": "pkg-lint",
-    "test": "NODE_ENV=test_local pkg-test",
-    "which-jadx": "which jadx"
+    "tidy": "pkg-tidy",
+    "test": "pkg-test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mishguruorg/jadx-node.git"
   },
-  "author": "developers@mish.guru",
+  "author": "Mish Guru <dev@mish.guru>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mishguruorg/jadx-node/issues"
   },
   "homepage": "https://github.com/mishguruorg/jadx-node#readme",
   "devDependencies": {
-    "@mishguru/package": "^7.7.0"
+    "@mishguru/package": "7.8.2",
+    "@types/yargs": "13.0.2"
+  },
+  "dependencies": {
+    "chalk": "2.4.2",
+    "execa": "2.0.4",
+    "yargs": "14.0.0"
   }
 }
