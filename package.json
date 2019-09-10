@@ -31,5 +31,10 @@
     "chalk": "2.4.2",
     "execa": "2.0.4",
     "yargs": "14.0.0"
+  },
+  "release-it": {
+    "scripts": {
+      "beforeStart": "npm run build"
+    }
   }
 }
