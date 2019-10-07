@@ -2,7 +2,7 @@ import anyTest, { TestInterface } from 'ava'
 import * as stu from 'stu'
 import { SinonStub } from 'sinon'
 
-import { JadxFn } from './index'
+import { JadxFn } from './jadx'
 
 const test = anyTest as TestInterface<{
   execa: SinonStub,
@@ -11,7 +11,7 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach((t) => {
   const execa = stu.mock('execa')
-  const { default: jadx } = stu.test('./index')
+  const { default: jadx } = stu.test('./jadx')
 
   t.context = {
     execa,
@@ -22,10 +22,10 @@ test.beforeEach((t) => {
 test('should pass correct argumens to execa', async (t) => {
   const { jadx, execa } = t.context
 
-  const INPUT = 'input'
-  const OUTPUT = 'output'
+  const sourcePath = 'sourcePath'
+  const outputDir = 'outputDir'
 
-  await jadx(INPUT, OUTPUT)
+  await jadx({ sourcePath, outputDir })
 
   t.is(execa.callCount, 1)
 
@@ -39,8 +39,8 @@ test('should pass correct argumens to execa', async (t) => {
     '--threads-count',
     '6',
     '--output-dir',
-    OUTPUT,
-    INPUT
+    sourcePath,
+    outputDir,
   ])
 
   t.deepEqual(options, {
