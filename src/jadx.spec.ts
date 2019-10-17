@@ -44,6 +44,7 @@ test('should pass correct argumens to execa', async (t) => {
   ])
 
   t.deepEqual(options, {
+    all: true,
     cwd: '.',
     env: {
       JAVA_OPTS: '-Xmx2G',
