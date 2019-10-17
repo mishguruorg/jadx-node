@@ -1,7 +1,8 @@
 import yargs from 'yargs'
 import chalk from 'chalk'
+import { resolve } from 'path'
 
-import jadx from './index'
+import decompile from './index'
 
 const argv = yargs
   .example('$0 -i classes.dex -o ./classes', 'Decompile a .dex file')
@@ -20,7 +21,7 @@ const argv = yargs
   })
   .parse()
 
-jadx(argv.input, argv.output).catch((error) => {
+decompile(resolve(argv.input), resolve(argv.output)).catch((error) => {
   console.error(chalk.red(error.message))
   process.exit(1)
 })

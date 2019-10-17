@@ -1,34 +1,75 @@
-import execa from 'execa'
-import path from 'path'
+import jadx from './jadx'
+import unzipApk from './unzip-apk'
+import * as tempy from 'tempy'
+import fs from 'fs'
+import ora from 'ora'
+import { DateTime } from 'luxon'
+import c from 'chalk'
 
-const JADX_PATH = path.join(__dirname, '../resources/jadx-1.0.0/bin/jadx')
+const decompile = async (rawSourcePath: string, outputDir: string) => {
+  const spinner = ora()
 
-export type JadxFn = (
-  sourceDexPath: string,
-  destinationDirectory: string,
-) => Promise<void>
+  const sourcePath = rawSourcePath.trim()
 
-const jadx: JadxFn = async (sourceDexPath, destinationDirectory) => {
-  await execa(
-    JADX_PATH,
-    [
-      '--no-res', // do not decode resources
-      '--show-bad-code',
-      '--threads-count',
-      '6',
-      '--output-dir',
-      destinationDirectory,
-      sourceDexPath,
-    ],
-    {
-      extendEnv: true,
-      env: {
-        JAVA_OPTS: '-Xmx2G',
-      },
-      stdout: 'inherit',
-      stderr: 'inherit',
-    },
-  )
+  if (sourcePath.endsWith('.dex')) {
+    const logPath = tempy.file()
+    return jadx({
+      sourcePath,
+      outputDir,
+      logPath,
+    })
+  }
+
+  if (sourcePath.endsWith('.apk')) {
+    spinner.start('Unzipping APK into temporary directory')
+    const tempDir = tempy.directory()
+    const dexFiles = await unzipApk({
+      zipPath: sourcePath,
+      outputDir: tempDir,
+    })
+    spinner.succeed()
+
+    try {
+      const count = dexFiles.length
+      for (let i = 0; i < count; i += 1) {
+        const dexFile = dexFiles[i]
+
+        const startTime = DateTime.local()
+        spinner.start()
+
+        const interval = setInterval(() => {
+          const diff = DateTime.local().diff(startTime)
+          const timeSince = diff.toFormat(`s's'`)
+          spinner.text = `Decompiling DEX file ${i + 1} of ${count} ${c.gray(
+            `(${timeSince})`,
+          )}`
+        }, 200)
+
+        try {
+          await jadx({
+            sourcePath: dexFile,
+            outputDir,
+          })
+        } catch (error) {
+          if (/ERROR - finished with errors$/.test(error.all) === false) {
+            console.error(
+              error.all
+                .split('\n')
+                .slice(-10)
+                .join('\n'),
+            )
+            throw error
+          }
+        }
+        spinner.succeed()
+        clearInterval(interval)
+      }
+    } finally {
+      spinner.start('Cleaning up temporary files')
+      await Promise.all(dexFiles.map((dexFile) => fs.promises.unlink(dexFile)))
+      spinner.succeed()
+    }
+  }
 }
 
-export default jadx
+export default decompile
