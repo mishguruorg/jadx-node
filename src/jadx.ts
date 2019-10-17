@@ -21,12 +21,13 @@ const jadx: JadxFn = async (options) => {
       '--no-res', // do not decode resources
       '--show-bad-code',
       '--threads-count',
-      '4',
+      '6',
       '--output-dir',
       outputDir,
       basename(sourcePath),
     ],
     {
+      all: true,
       cwd: dirname(sourcePath),
       extendEnv: true,
       env: {

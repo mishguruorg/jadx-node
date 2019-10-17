@@ -39,16 +39,15 @@ test('should pass correct argumens to execa', async (t) => {
     '--threads-count',
     '6',
     '--output-dir',
-    sourcePath,
     outputDir,
+    sourcePath,
   ])
 
   t.deepEqual(options, {
-    extendEnv: true,
+    cwd: '.',
     env: {
       JAVA_OPTS: '-Xmx2G',
     },
-    stdout: 'inherit',
-    stderr: 'inherit',
+    extendEnv: true,
   })
 })
