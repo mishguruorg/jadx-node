@@ -1,6 +1,6 @@
 {
   "name": "@mishguru/jadx-node",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "A wrapper around Jadx for decompiling Java dex files",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
