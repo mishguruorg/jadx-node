@@ -5,9 +5,9 @@ import { dirname, basename } from 'path'
 const JADX_PATH = path.join(__dirname, '../resources/jadx-1.1.0/bin/jadx')
 
 interface JadxOptions {
-  sourcePath: string
-  outputDir: string
-  logPath?: string
+  sourcePath: string,
+  outputDir: string,
+  logPath?: string,
 }
 
 export type JadxFn = (options: JadxOptions) => Promise<void>

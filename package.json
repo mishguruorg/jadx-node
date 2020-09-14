@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/mishguruorg/jadx-node#readme",
   "devDependencies": {
-    "@mishguru/package": "8.0.0",
+    "@stayradiated/pkg": "4.4.0",
     "@types/luxon": "1.24.4",
     "@types/sinon": "9.0.5",
     "@types/yargs": "15.0.5",
@@ -38,10 +38,5 @@
     "ora": "5.1.0",
     "tempy": "0.7.0",
     "yargs": "16.0.3"
-  },
-  "release-it": {
-    "scripts": {
-      "beforeStart": "npm run build"
-    }
   }
 }

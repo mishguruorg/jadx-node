@@ -1,9 +1,9 @@
 import execa from 'execa'
 
 interface UnzipOptions {
-  zipPath: string
-  filesToExtract: string
-  outputDir: string
+  zipPath: string,
+  filesToExtract: string,
+  outputDir: string,
 }
 
 const unzip = async (options: UnzipOptions) => {
@@ -20,8 +20,8 @@ const unzip = async (options: UnzipOptions) => {
 }
 
 interface UnzipApkOptions {
-  zipPath: string
-  outputDir: string
+  zipPath: string,
+  outputDir: string,
 }
 
 const unzipApk = (options: UnzipApkOptions) => {
