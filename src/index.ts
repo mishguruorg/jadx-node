@@ -52,12 +52,7 @@ const decompile = async (rawSourcePath: string, outputDir: string) => {
           })
         } catch (error) {
           if (/ERROR - finished with errors$/.test(error.all) === false) {
-            console.error(
-              error.all
-                .split('\n')
-                .slice(-10)
-                .join('\n'),
-            )
+            console.error(error.all.split('\n').slice(-10).join('\n'))
             throw error
           }
         }

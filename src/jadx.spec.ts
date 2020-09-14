@@ -5,8 +5,8 @@ import { SinonStub } from 'sinon'
 import { JadxFn } from './jadx'
 
 const test = anyTest as TestInterface<{
-  execa: SinonStub,
-  jadx: JadxFn,
+  execa: SinonStub
+  jadx: JadxFn
 }>
 
 test.beforeEach((t) => {
