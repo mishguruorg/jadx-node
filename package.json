@@ -34,7 +34,7 @@
   "dependencies": {
     "chalk": "4.1.0",
     "execa": "4.0.3",
-    "luxon": "1.25.0",
+    "luxon": "1.28.1",
     "ora": "5.1.0",
     "tempy": "0.7.0",
     "yargs": "16.0.3"
